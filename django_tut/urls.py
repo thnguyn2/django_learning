@@ -16,6 +16,17 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from rango import views
+from django.conf.urls import url
+#Import the url objects to define the mapping
+from django.contrib import admin
+from django.conf.urls import include
+#This is a method to h
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', views.index, name='index1'),
+    url(r'^rango/',include('rango.urls')),
+    #The remainder of the string after stripping rango will be handled by rango.url.
+    # Here, we import other URL configuration module. Not ending with $ but a /
+    #reg, views. kwargs, name = None, prefix=''
 ]
