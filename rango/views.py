@@ -1,10 +1,14 @@
 from django.shortcuts import render
+#This method is used to update the template with the dict
 
 # Create your views here.
 from django.http import HttpResponse
 
+from django.shortcuts import render
+
 def index(request):
-    return HttpResponse("Hello, this is the first response from the Rango view. See the about page <a href='/rango/about'>About</a>")
+    update_content = {'boldmessage': 'Crunchy, creamy, cookie, candy, cupcake!!!'}
+    return render(request, 'rango/index.html', context=update_content)
 
 def index2(request):
     return HttpResponse("Hello, this is the second response from the Rango view.")
