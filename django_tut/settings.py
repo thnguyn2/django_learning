@@ -32,8 +32,14 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 #Path to the template folder
+
+STATIC_DIR=os.path.join(BASE_DIR, 'static')
+#Path to the static files folder
+
+STATICFILES_DIRS = [STATIC_DIR,
+                   ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
