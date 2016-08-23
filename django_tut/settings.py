@@ -40,6 +40,7 @@ STATIC_DIR=os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [STATIC_DIR,
                    ]
+#This is the default name for the static folder on the server side
 
 INSTALLED_APPS = [
     'django.contrib.admin',

@@ -14,4 +14,5 @@ def index2(request):
     return HttpResponse("Hello, this is the second response from the Rango view.")
 
 def about(request):
-    return HttpResponse("Rango says here is the about page. Go back to the <a href='/'>main</a> page. Otherwise, go to the <a href='/rango/''>second</a> page")
+    about_content = {'your_name': 'Tan Huu Nguyen'}
+    return render(request, 'rango/about.html', context=about_content)
