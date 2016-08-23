@@ -28,14 +28,15 @@ def populate():
                    {'title': 'Flask',
                     'url': 'http://flask.pocoo.org'}]
 
-    cats = {'Python': {'pages': python_pages},
-            'Django': {'pages': django_pages},
-            'Other frameworks': {'pages': other_pages}}
+    cats = {'Python': {'pages': python_pages, 'views': 128, 'likes': 32},
+            'Django': {'pages': django_pages, 'views': 64, 'likes': 32},
+            'Other frameworks': {'pages': other_pages, 'views': 32, 'likes': 16}}
 
     #Now, add categories
     for cat_name, cat_pages in cats.items():
         print('Adding category with name: ' + cat_name)
-        curcat = add_cat(cat_name)
+        curcat = add_cat(cat_name,cat_pages['views'],cat_pages['likes'])
+        #print('Views: {0}, Likes: {1}'.format(str(cat_pages['views']),str(cat_pages['likes'])))
         #Now add all pages for each category
         for page in cat_pages['pages']:
             add_page(curcat, page['title'], page['url'])
@@ -43,7 +44,7 @@ def populate():
 
     #Print all categories
     for c in Category.objects.all():
-        print('Found category with name: ' + c.name)
+        print('Found category with name: {0}, views: {1}, likes: {2}'.format(c.name,c.views,c.likes))
         #Display all the pages asscoated with each Categories
         for p in Page.objects.filter(category=c):
             print('Page: {0}'.format(str(p)))
@@ -54,12 +55,14 @@ def add_page(cat, title, url, views =0):
     #Add a page
     p= Page.objects.get_or_create(category=cat, title=title, url=url, views=views)[0]
     p.save()
-    print(created)
     return p
 
-def add_cat(name):
+def add_cat(name,views,likes):
     #Add a category
-    c = Category.objects.get_or_create(name= name)[0]
+    c = Category.objects.get_or_create(name=name)[0]
+    #For updating, we just get it and change the attritube
+    c.views = views
+    c.likes = likes
     c.save()
     return c
 

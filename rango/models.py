@@ -8,7 +8,8 @@ class Category(models.Model):
     #Define a list of fields
     name = models.CharField(max_length=128, unique=True)
     #Make the field unique
-
+    views = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
     class Meta:
         verbose_name_plural = 'categories'
         #Define how the plural should be, it is just a meta option, define everything but not a field
