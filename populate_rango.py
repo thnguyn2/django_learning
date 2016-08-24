@@ -11,22 +11,22 @@ from rango.models import Category, Page
 def populate():
     #Define the pages for each category. Use a list of dictionary elements
     python_pages = [{'title': 'Official python tutorial',
-                     'url': 'http://docs.python.org/2/tutorial/'},
+                     'url': 'http://docs.python.org/2/tutorial/', 'views': 432},
                     {'title': 'How to think like a computer scientist',
-                     'url': 'http://www.greenteapress.com/thinkpython'},
+                     'url': 'http://www.greenteapress.com/thinkpython', 'views': 65},
                     {'title': 'Lean Python in 10 minutes',
-                     'url': 'http://www.korokithakis.net/tutorials/python'}]
+                     'url': 'http://www.korokithakis.net/tutorials/python', 'views': 242}]
 
     django_pages = [{'title': 'Official Django tutorial',
-                     'url': 'https://docs.djangoproject.com/en/1.9/intro/tutorial01/'},
+                     'url': 'https://docs.djangoproject.com/en/1.9/intro/tutorial01/', 'views': 54},
                     {'title': 'Django Rocks',
-                     'url': 'http://www.djangorocks.com'},
+                     'url': 'http://www.djangorocks.com', 'views': 17},
                     {'title': 'How to tango with django',
-                     'url': 'http://www.tangowithdjango.com'}]
+                     'url': 'http://www.tangowithdjango.com', 'views': 32}]
     other_pages = [{'title': 'Bottle',
-                    'url': 'http://bottepy.org/docs/dev/'},
+                    'url': 'http://bottepy.org/docs/dev/', 'views': 25},
                    {'title': 'Flask',
-                    'url': 'http://flask.pocoo.org'}]
+                    'url': 'http://flask.pocoo.org', 'views': 575}]
 
     cats = {'Python': {'pages': python_pages, 'views': 128, 'likes': 32},
             'Django': {'pages': django_pages, 'views': 64, 'likes': 32},
@@ -39,7 +39,7 @@ def populate():
         #print('Views: {0}, Likes: {1}'.format(str(cat_pages['views']),str(cat_pages['likes'])))
         #Now add all pages for each category
         for page in cat_pages['pages']:
-            add_page(curcat, page['title'], page['url'])
+            add_page(curcat, page['title'], page['url'], page['views'])
 
 
     #Print all categories
@@ -51,7 +51,7 @@ def populate():
 
     pass
 
-def add_page(cat, title, url, views =0):
+def add_page(cat, title, url, views):
     #Add a page
     p= Page.objects.get_or_create(category=cat, title=title, url=url, views=views)[0]
     p.save()

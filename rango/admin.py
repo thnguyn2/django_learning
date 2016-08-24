@@ -5,7 +5,7 @@ from django.contrib import admin
 from models import Category, Page
 
 class PageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'url')
+    list_display = ('title', 'category', 'url', 'views')
     #Display the following in the admin page
 
 class CategoryAdmin(admin.ModelAdmin):

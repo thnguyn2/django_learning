@@ -13,6 +13,7 @@
 
     <!--Display 5 categories-->
     <div>
+    <h2>Most liked categories</h2>
     <ul>
         {% if categories %}
             {% for category in categories %}
@@ -23,6 +24,19 @@
         {% endif %}
     </ul>
     </div>
+
+        <div>
+            <h2>Most Viewed Pages</h2>
+            <ul>
+                {%  if most_view_pages %}
+                    {% for page in most_view_pages %}
+                        <li><a href = "{{ page.url }}">{{page.title}}</a>. #Views: ({{ page.views }})</li>
+                    {% endfor %}
+
+                {% else %}
+                {% endif %}
+            </ul>
+        </div>
 
     <div>
         <a href="/rango/about">About</a><br />

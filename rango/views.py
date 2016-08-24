@@ -11,7 +11,9 @@ from rango.models import Category, Page
 def index(request):
     #First, get 5 categories after sorting in descending order
     all_cats = Category.objects.order_by('-likes')[:5]
-    context_dict = {'categories': all_cats}
+    most_views_pages = Page.objects.order_by('-views')[:5]
+    #Extract 5 most view category and send it to the context, '-' is the minus sign since the order_by will sort by increasing order
+    context_dict = {'categories': all_cats, 'most_view_pages': most_views_pages}
     #'categories' is the name of the context variable
 
     #update_content = {'boldmessage': 'Crunchy, creamy, cookie, candy, cupcake!!!'}
