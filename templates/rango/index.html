@@ -9,7 +9,19 @@
         <h1>Rango says...</h1>
     <div>
         Hey there partner!<br />
-        <strong>{{ boldmessage }}</strong><br />
+    </div>
+
+    <!--Display 5 categories-->
+    <div>
+    <ul>
+        {% if categories %}
+            {% for category in categories %}
+                <li><a href = "rango/category/{{ category.slug }}">{{ category.name }} </a>, #likes: {{ category.likes }}</li><!--Define a list item <li> is for listing the elements, <ul> is the unordered list-->
+            {% endfor %}
+        {% else %}
+            <strong>There are no categories present.</strong>
+        {% endif %}
+    </ul>
     </div>
 
     <div>

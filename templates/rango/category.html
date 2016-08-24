@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rango category</title>
+</head>
+<body>
+    <div>
+        {% if category %}
+        <!--'category' in a key in context field for the template-->
+            <h1>{{ category.name }}</h1>
+            {% if pages %}
+                <ul>
+                {% for page in pages %}
+                    <!--'pages' is a key in the context dictionary-->
+                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                {% endfor %}
+                </ul>
+            {% else %}
+            {% endif %}
+
+        {% else %}
+            The current category does not exist!
+        {% endif %}
+    </div>
+
+</body>
+</html>
