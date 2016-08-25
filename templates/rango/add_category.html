@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rango</title>
+    </head>
+
+    <body>
+        <h1>Add a category</h1>
+        <div>
+            <form id="category_form" method="POST" action="/rango/add_category/">
+                {% csrf_token %}
+                <!--Prevent erros on multiple submission-->
+                {% for hidden in form.hidden_fields %}
+                    <!--Note that 'form' is the key to the context variable of the view.add_category()-->
+                    {{ hidden }}
+                {% endfor %}
+                {% for field in form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}
+                    {{ field }}
+                {% endfor %}
+                <input type="submit" name="submit" value="Create new category in the server" />
+            </form>
+        </div>
+    </body>
+</html>

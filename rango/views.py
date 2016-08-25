@@ -6,7 +6,7 @@ from django.http import HttpResponse
 
 from django.shortcuts import render
 from rango.models import Category, Page
-
+from rango.forms import CategoryForm
 
 def index(request):
     #First, get 5 categories after sorting in descending order
@@ -40,3 +40,22 @@ def index2(request):
 def about(request):
     about_content = {'your_name': 'Tan Huu Nguyen'}
     return render(request, 'rango/about.html', context=about_content)
+
+def add_category(request):
+    form = CategoryForm()
+    #Create a new form
+    if request.method=='POST':
+        #if this is an HTTP post
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            cat = form.save(commit=True)
+            #cat is an instance of the saved category
+            print(cat, cat.slug)
+            return index(request)
+        else:
+            #Print the error to the terminal
+            print(form.errors)
+    #Handle the bad form, no form or new form
+    return render(request, 'rango/add_category.html', {'form': form})
+
+
