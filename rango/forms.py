@@ -17,19 +17,22 @@ class PageForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Please enter the title of the page")
     url = forms.URLField(max_length=128, help_text="Please enter the URL of the page")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    def clean(self):
-        clean_data = self.cleaned_data
-        url = clean_data.get('url')
-        if url and not url.startswiths('http://'):
-            url = 'http://'+url
-            clean_data['url']=url
-        return clean_data
+
+    #def clean(self):
+    #    clean_data = self.cleaned_data
+    #    url = clean_data.get('url')
+    #    if url and not url.startswiths('http://'):
+    #        url = 'http://'+url
+    #        clean_data['url']=url
+    #    return clean_data
 
 
     class Meta:
-        model=Page
+        model = Page
         #Associate the ModelForm with the Page model
-        exclude=('Category',)
+        exclude = ('category',)
+
+        #Note that category here is a field, defined in models.py
         #Equivalent to fields = ('title','url','views',)
 
 

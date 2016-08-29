@@ -6,7 +6,7 @@ from django.http import HttpResponse
 
 from django.shortcuts import render
 from rango.models import Category, Page
-from rango.forms import CategoryForm
+from rango.forms import CategoryForm, PageForm
 
 def index(request):
     #First, get 5 categories after sorting in descending order
@@ -50,7 +50,6 @@ def add_category(request):
         if form.is_valid():
             cat = form.save(commit=True)
             #cat is an instance of the saved category
-            print(cat, cat.slug)
             return index(request)
         else:
             #Print the error to the terminal
@@ -59,3 +58,34 @@ def add_category(request):
     return render(request, 'rango/add_category.html', {'form': form})
 
 
+def add_page(request, category_name_slug):
+    try:
+        category = Category.objects.get(slug = category_name_slug)
+        #category_name_slug is provided by the URL
+    except Category.DoesNotExist:
+        category = None
+
+    print("Name of the category: " + category.name)
+
+
+    form = PageForm()
+    #Note that the 'model' defined in PageForm is Page type
+    if request.method=='POST':
+        #if the form is submitted
+        form = PageForm(request.POST)
+        if form.is_valid():
+            if category:
+                #Get the 'page' object from the PageForm object
+                page = form.save(commit=False)
+                page.category = category #Add the category at this point, the category has been excluded
+                #Category on the right is from the URL
+                page.views=0
+                page.save()
+                return show_category(request, category_name_slug)
+                #Quit the page form and display the current category
+        else:
+            print(form.errors)
+
+    #If the use has not click the submit button, re-render the page
+    context_dict = {'form': form, 'category': category}
+    return render(request, 'rango/add_page.html', context_dict)

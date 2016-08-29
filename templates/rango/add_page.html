@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+    <body>
+        <h1>Add a page</h1>
+        {% if category %}
+        <div>
+            <form id="page_form" method="POST" action="/rango/category/{{ category.slug }}/add_page/">
+                <!--Capture all the data and send to the URL /rango/category/{category.slug}/add_page/-->
+                <!--Also note that the posted page should NOT have .html-->
+                {% csrf_token %}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                    <!--Make sure that all hidden fields are display to avoid INVALID FORM errors-->
+                {% endfor %}
+
+
+                {% for field in form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}
+                    {{ field }}
+                {% endfor %}
+                <input type="submit" name="submit" value="Create Page" />
+            </form>
+        </div>
+        {% else %}
+            The category you requested does not exist <br />
+        {% endif %}
+    </body>
+</html>

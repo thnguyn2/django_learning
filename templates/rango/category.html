@@ -21,8 +21,10 @@
         {% else %}
             The current category does not exist!
         {% endif %}
-
-        Return <a href= "/">Home</a>
+        <!--Link to the add page to the current category-->
+        <a href="/rango/category/{{ category.slug }}/add_page/">Add page</a><br />
+        <!--There is no need to use add_page.html here since html should be used for the template only-->
+         Return <a href= "/">Home</a>
     </div>
 
 </body>
