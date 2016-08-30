@@ -1,52 +1,36 @@
-<!DOCTYPE html>
-{% load staticfiles %} <!--We will be using static files in the template-->
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    <title>Rango title</title>
+{% endblock %}
 
-<html>
-    <head>
-            <title>Rango title </title>
-    </head>
-
-    <body>
-        <h1>Rango says...</h1>
+{% block body_block %}
+    <h1>Rango says...</h1>
     <div>
-        Hey there partner!<br />
+        Hey there partner! <br/>
     </div>
-
-    <!--Display 5 categories-->
-    <div>
-    <h2>Most liked categories</h2>
+    <h2>Most liked category</h2>
     <ul>
         {% if categories %}
             {% for category in categories %}
-                <!--<li><a href = "rango/category/{{ category.slug }}">-->
-                <li><a href="{% url 'rango:show_category' category.slug %}">
-                    {{ category.name }} </a>, #likes: {{ category.likes }}</li><!--Define a list item <li> is for listing the elements, <ul> is the unordered list-->
+                <li><a href="{% url 'rango:show_category' category.slug %}">{{ category.name }}</a>. #likes: {{ category.likes }}</li>
             {% endfor %}
         {% else %}
-            <strong>There are no categories present.</strong>
+            <strong>There are no category present.</strong>
         {% endif %}
     </ul>
-    </div>
+    <h2>Most viewed pages</h2>
+    <ul>
+        {% if most_view_pages %}
+            {% for page in most_view_pages %}
+                <li><a href = "{{ page.url }}">{{ page.title }}</a>, #views: {{ page.views }}</li>
 
-        <div>
-            <h2>Most Viewed Pages</h2>
-            <ul>
-                {%  if most_view_pages %}
-                    {% for page in most_view_pages %}
-                        <li><a href = "{{ page.url }}">{{page.title}}</a>. #Views: ({{ page.views }})</li>
-                    {% endfor %}
+            {% endfor %}
+        {% endif %}
+    </ul>
+    <!--Add the add category page-->
+    <a href="{% url 'rango:add_category' %}">Add a new category</a><br/>
+    <img src = "{% static "images/mascot.jpeg" %}" alt ="Picture of Rango" /> <!--This call will replace static with STATIC_URL deffined in the settings.py--->
 
-                {% else %}
-                {% endif %}
-            </ul>
-            <a href="/rango/add_category">Add a new category</a><br/>
-        </div>
+{% endblock %}
 
-    <div>
-        <a href={%  url 'rango:about' %}>About</a><br />
-        <img src = "{% static "images/mascot.jpeg" %}"
-             alt ="Picture of Rango" /> <!--This call will replace static with STATIC_URL deffined in the settings.py--->
-    </div>
-
-    </body>
-</html>

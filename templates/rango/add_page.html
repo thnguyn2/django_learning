@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html>
-
-    <body>
-        <h1>Add a page</h1>
-        {% if category %}
+{% extends 'rango/base.html' %}
+{% block title_block %}
+    <title>Add a page</title>
+{% endblock %}
+{% block body_block %}
+    {% if category %}
         <div>
-            <form id="page_form" method="POST" action="/rango/category/{{ category.slug }}/add_page/">
+            <form id="page_form" method="POST" action="{% url 'rango:add_page' category.slug %}">
                 <!--Capture all the data and send to the URL /rango/category/{category.slug}/add_page/-->
                 <!--Also note that the posted page should NOT have .html-->
                 {% csrf_token %}
@@ -26,5 +26,5 @@
         {% else %}
             The category you requested does not exist <br />
         {% endif %}
-    </body>
-</html>
+
+{% endblock %}
