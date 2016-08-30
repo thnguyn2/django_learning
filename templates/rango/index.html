@@ -17,7 +17,9 @@
     <ul>
         {% if categories %}
             {% for category in categories %}
-                <li><a href = "rango/category/{{ category.slug }}">{{ category.name }} </a>, #likes: {{ category.likes }}</li><!--Define a list item <li> is for listing the elements, <ul> is the unordered list-->
+                <!--<li><a href = "rango/category/{{ category.slug }}">-->
+                <li><a href="{% url 'rango:show_category' category.slug %}">
+                    {{ category.name }} </a>, #likes: {{ category.likes }}</li><!--Define a list item <li> is for listing the elements, <ul> is the unordered list-->
             {% endfor %}
         {% else %}
             <strong>There are no categories present.</strong>
@@ -40,7 +42,7 @@
         </div>
 
     <div>
-        <a href="/rango/about">About</a><br />
+        <a href={%  url 'rango:about' %}>About</a><br />
         <img src = "{% static "images/mascot.jpeg" %}"
              alt ="Picture of Rango" /> <!--This call will replace static with STATIC_URL deffined in the settings.py--->
     </div>
