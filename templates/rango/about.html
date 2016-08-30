@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-{%  load staticfiles %}
-<html>
-    <head>
-        <title> Template homework for the about page </title>
-    </head>
-    <body>
-        <h1>This tutorial has been put together by {{ your_name }} </h1>
-        <div>
-            Go back to the <br />
-            <a href='/'>main</a> page. Otherwise, go to the <a href='/rango/'>second</a> page." <br />
-        </div>
+{% extends 'rango/base.html'%}
+{% load staticfiles%}
+{% block title_block %}
+    <title>Template homework for the about page</title>
+{% endblock %}
 
-        <div>
-            <img src = "{%  static  "images/thetest.png" %}" alt =" About image"/>
-        </div>
-    </body>
-</html>
+{% block body_block %}
+    <h1>This tutorial has been put togeher by {{ your_name }}.</h1>
+    <div>
+        Go back to the <br/>
+        <a href="{% url 'index1' %}">Main </a> page. Otherwise, go to the <a href="{% url 'rango:rango_main'%}">Second page</a>
+    </div>
+
+    <div>
+       <img src = "{%  static  "images/thetest.png" %}" alt =" About image"/>
+    </div>
+{% endblock %}
