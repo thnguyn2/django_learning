@@ -39,6 +39,10 @@ def index2(request):
 
 def about(request):
     about_content = {'your_name': 'Tan Huu Nguyen'}
+    #Print out the request.method (GET/POST)
+    print(request.method)
+    #print out the user name
+    print(request.user)
     return render(request, 'rango/about.html', context=about_content)
 
 def add_category(request):

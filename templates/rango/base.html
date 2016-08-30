@@ -1,5 +1,14 @@
 <!DOCTYPE html>
+{% load rango_template_tags %}
 <html>
+    <title>All categories available</title>
+    <div>
+        {% block sidebar_block %}
+            {% get_category_list category%}
+            <!--This is a function defeind in rango_template_tags.py-->
+        {% endblock %}
+    </div>
+
     <head>
         <meta charset="UTF-8"/>
         <title>Rango -
